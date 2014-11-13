@@ -1,0 +1,1672 @@
+  [1m[36m (126.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (131.2ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsers (20141113123926)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20141113123926"]]
+  [1m[35m (128.6ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddPasswordDigestToUsers (20141113144543)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "users" ADD "password_digest" varchar[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141113144543"]]
+  [1m[36m (122.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('sergio@exemplo.pt') LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-11-13 14:53:11.516200"], ["email", "sergio@exemplo.pt"], ["name", "Sergio"], ["password_digest", "$2a$10$uQvPwztpwESHNKkhGSGL1.Hayh5KJ2c0UDuTA0xsK/N/HJU0KcIB2"], ["updated_at", "2014-11-13 14:53:11.516200"]]
+  [1m[35m (127.8ms)[0m  commit transaction
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users"
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('user@example.com') LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-11-13 14:58:33.607833"], ["email", "user@example.com"], ["name", "Example User"], ["password_digest", "$2a$10$Sn70Miip6kMwSR8e5Oy.jOkca/scROLisbwhffsfRQ6ppNHuB3Wnu"], ["updated_at", "2014-11-13 14:58:33.607833"]]
+  [1m[35m (149.4ms)[0m  commit transaction
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 15:39:23 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/railties-4.2.0.beta2/lib/rails/templates/rails/welcome/index.html.erb (6.5ms)
+Completed 200 OK in 97ms (Views: 56.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 15:43:36 +0000
+
+ActionController::RoutingError (uninitialized constant WelcomeController):
+  activesupport (4.2.0.beta2) lib/active_support/inflector/methods.rb:261:in `const_get'
+  activesupport (4.2.0.beta2) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0.beta2) lib/active_support/inflector/methods.rb:259:in `each'
+  activesupport (4.2.0.beta2) lib/active_support/inflector/methods.rb:259:in `inject'
+  activesupport (4.2.0.beta2) lib/active_support/inflector/methods.rb:259:in `constantize'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:68:in `controller_reference'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:58:in `controller'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:37:in `serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:750:in `call'
+  rack (1.6.0.beta) lib/rack/etag.rb:23:in `call'
+  rack (1.6.0.beta) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0.beta) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/flash.rb:257:in `call'
+  rack (1.6.0.beta) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0.beta) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/cookies.rb:558:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/connection_adapters/abstract/connection_pool.rb:645:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:83:in `run_callbacks'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0.beta4) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0.beta4) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0.beta) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0.beta) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0.beta) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/static.rb:103:in `call'
+  rack (1.6.0.beta) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0.beta2) lib/rails/engine.rb:514:in `call'
+  railties (4.2.0.beta2) lib/rails/application.rb:161:in `call'
+  rack (1.6.0.beta) lib/rack/tempfile_reaper.rb:15:in `call'
+  rack (1.6.0.beta) lib/rack/lint.rb:49:in `_call'
+  rack (1.6.0.beta) lib/rack/lint.rb:37:in `call'
+  rack (1.6.0.beta) lib/rack/showexceptions.rb:24:in `call'
+  rack (1.6.0.beta) lib/rack/commonlogger.rb:33:in `call'
+  rack (1.6.0.beta) lib/rack/chunked.rb:54:in `call'
+  rack (1.6.0.beta) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0.beta) lib/rack/handler/webrick.rb:89:in `service'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (6.5ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/routes/_route.html.erb (3.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/routes/_table.html.erb (50.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (138.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 15:44:31 +0000
+
+AbstractController::ActionNotFound (The action 'index' could not be found for ApplicationController):
+  actionpack (4.2.0.beta2) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.0.beta2) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.0.beta2) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.0.beta2) lib/action_controller/metal.rb:236:in `block in action'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:72:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:72:in `dispatch'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:41:in `serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:750:in `call'
+  rack (1.6.0.beta) lib/rack/etag.rb:23:in `call'
+  rack (1.6.0.beta) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0.beta) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/flash.rb:257:in `call'
+  rack (1.6.0.beta) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0.beta) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/cookies.rb:558:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/connection_adapters/abstract/connection_pool.rb:645:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:83:in `run_callbacks'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0.beta4) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0.beta4) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0.beta) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0.beta) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0.beta) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/static.rb:103:in `call'
+  rack (1.6.0.beta) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0.beta2) lib/rails/engine.rb:514:in `call'
+  railties (4.2.0.beta2) lib/rails/application.rb:161:in `call'
+  rack (1.6.0.beta) lib/rack/tempfile_reaper.rb:15:in `call'
+  rack (1.6.0.beta) lib/rack/lint.rb:49:in `_call'
+  rack (1.6.0.beta) lib/rack/lint.rb:37:in `call'
+  rack (1.6.0.beta) lib/rack/showexceptions.rb:24:in `call'
+  rack (1.6.0.beta) lib/rack/commonlogger.rb:33:in `call'
+  rack (1.6.0.beta) lib/rack/chunked.rb:54:in `call'
+  rack (1.6.0.beta) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0.beta) lib/rack/handler/webrick.rb:89:in `service'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/unknown_action.html.erb within rescues/layout (1.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 15:47:49 +0000
+Processing by ApplicationController#home as HTML
+Completed 500 Internal Server Error in 10ms
+
+ActionView::MissingTemplate (Missing template application/home with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates"
+  * "/home/sergio/the_odin_projects/rails_projects/members-only/app/views"
+  * "/home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/app/views"
+):
+  actionview (4.2.0.beta2) lib/action_view/path_set.rb:46:in `find'
+  actionview (4.2.0.beta2) lib/action_view/lookup_context.rb:121:in `find'
+  actionview (4.2.0.beta2) lib/action_view/renderer/abstract_renderer.rb:18:in `find_template'
+  actionview (4.2.0.beta2) lib/action_view/renderer/template_renderer.rb:40:in `determine_template'
+  actionview (4.2.0.beta2) lib/action_view/renderer/template_renderer.rb:8:in `render'
+  actionview (4.2.0.beta2) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.0.beta2) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.0.beta2) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.0.beta2) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.0.beta2) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/instrumentation.rb:41:in `block (2 levels) in render'
+  activesupport (4.2.0.beta2) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/benchmark.rb:294:in `realtime'
+  activesupport (4.2.0.beta2) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/instrumentation.rb:41:in `block in render'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/instrumentation.rb:84:in `cleanup_view_runtime'
+  activerecord (4.2.0.beta2) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/instrumentation.rb:40:in `render'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.2.0.beta2) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.0.beta2) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:114:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:114:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:231:in `block in halting'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:231:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:231:in `block in halting'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:166:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:166:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:231:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:231:in `block in halting'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:166:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:166:in `block in halting'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:87:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:87:in `run_callbacks'
+  actionpack (4.2.0.beta2) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+  activesupport (4.2.0.beta2) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.0.beta2) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.0.beta2) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.0.beta2) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.0.beta2) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.0.beta2) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.0.beta2) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.0.beta2) lib/action_controller/metal.rb:236:in `block in action'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:72:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:72:in `dispatch'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:41:in `serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:750:in `call'
+  rack (1.6.0.beta) lib/rack/etag.rb:23:in `call'
+  rack (1.6.0.beta) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0.beta) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/flash.rb:257:in `call'
+  rack (1.6.0.beta) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0.beta) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/cookies.rb:558:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/connection_adapters/abstract/connection_pool.rb:645:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:83:in `run_callbacks'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0.beta4) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0.beta4) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0.beta) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0.beta) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0.beta) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/static.rb:103:in `call'
+  rack (1.6.0.beta) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0.beta2) lib/rails/engine.rb:514:in `call'
+  railties (4.2.0.beta2) lib/rails/application.rb:161:in `call'
+  rack (1.6.0.beta) lib/rack/tempfile_reaper.rb:15:in `call'
+  rack (1.6.0.beta) lib/rack/lint.rb:49:in `_call'
+  rack (1.6.0.beta) lib/rack/lint.rb:37:in `call'
+  rack (1.6.0.beta) lib/rack/showexceptions.rb:24:in `call'
+  rack (1.6.0.beta) lib/rack/commonlogger.rb:33:in `call'
+  rack (1.6.0.beta) lib/rack/chunked.rb:54:in `call'
+  rack (1.6.0.beta) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0.beta) lib/rack/handler/webrick.rb:89:in `service'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/missing_template.html.erb within rescues/layout (1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 15:48:30 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (1.1ms)
+Warning. Error encountered while saving cache eecdaac294dadfe634fc30abdbbfeddb758edeed/sessions.css.scssc: can't dump anonymous class #<Class:0x000000015194a0>
+
+Warning. Error encountered while saving cache eecdaac294dadfe634fc30abdbbfeddb758edeed/users.css.scssc: can't dump anonymous class #<Class:0x000000015194a0>
+
+Completed 200 OK in 2492ms (Views: 2491.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/sessions-c15e1c77cb5b3534b610348cb9f3c56d.css?body=1" for 127.0.0.1 at 2014-11-13 15:48:33 +0000
+
+
+Started GET "/assets/turbolinks-60c7d150bd7b7a75d67e6d1f0d4129a6.js?body=1" for 127.0.0.1 at 2014-11-13 15:48:33 +0000
+
+
+Started GET "/assets/sessions-5cf9e471f6dbffd4600ae141132a5888.js?body=1" for 127.0.0.1 at 2014-11-13 15:48:33 +0000
+
+
+Started GET "/assets/application-4553af0871b2c76ce829fbc5e624610e.js?body=1" for 127.0.0.1 at 2014-11-13 15:48:33 +0000
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 15:48:42 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (95.1ms)
+Completed 500 Internal Server Error in 113ms
+
+NameError (undefined local variable or method `signup_path' for #<#<Class:0x00000003035888>:0x00000002ff66d8>):
+  app/views/sessions/new.html.erb:15:in `_app_views_sessions_new_html_erb___4017903294204242068_25122340'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (23.0ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (9.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.4ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (112.5ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 15:48:43 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (37.9ms)
+Completed 500 Internal Server Error in 47ms
+
+NameError (undefined local variable or method `signup_path' for #<#<Class:0x00000003035888>:0x0000000481a4a8>):
+  app/views/sessions/new.html.erb:15:in `_app_views_sessions_new_html_erb___4017903294204242068_37818480'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (27.1ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (9.1ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (112.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 15:49:54 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 341ms (Views: 309.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 15:49:57 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (34.2ms)
+Completed 200 OK in 254ms (Views: 252.8ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remmeber_user@example.com') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddRememberDigestToUsers (20141113162102)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "users" ADD "remember_digest" varchar[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141113162102"]]
+  [1m[36m (131.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.6ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.5ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-11-13 16:48:02.858166"], ["email", "remember_user@example.com"], ["name", "Remember User"], ["password_digest", "$2a$10$Ueo9CoM08vaSsPqkqB3HH.HRe1uE5TkS8Y6EWrtpKfq4mhCPrUr66"], ["updated_at", "2014-11-13 16:48:02.858166"]]
+  [1m[35m (116.0ms)[0m  commit transaction
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36m (134.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "password_digest" varchar, "remember_digest" varchar) [0m
+  [1m[35m (106.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (109.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (99.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113162102')
+  [1m[36m (99.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141113123926')[0m
+  [1m[35m (132.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113144543')
+  [1m[36m (130.4ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "password_digest" varchar, "remember_digest" varchar) [0m
+  [1m[35m (131.4ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (132.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (131.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113162102')
+  [1m[36m (121.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141113123926')[0m
+  [1m[35m (99.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113144543')
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (4.0ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36mUser Load (4.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-11-13 16:53:45.747857"], ["email", "remember_user@example.com"], ["name", "Remember User"], ["password_digest", "$2a$10$8RdrDO/.sf/1GtxkvrqpSOP/5Kd00Q4/WHUu4/swPBERHfPtP58xG"], ["updated_at", "2014-11-13 16:53:45.747857"]]
+  [1m[35m (263.6ms)[0m  commit transaction
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.6ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_uster@example.com') LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[36m (110.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "password_digest" varchar, "remember_digest" varchar) [0m
+  [1m[35m (128.4ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (143.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.4ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (131.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113162102')
+  [1m[36m (100.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141113123926')[0m
+  [1m[35m (99.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113144543')
+  [1m[36m (105.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "password_digest" varchar, "remember_digest" varchar) [0m
+  [1m[35m (109.5ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (109.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (110.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113162102')
+  [1m[36m (132.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141113123926')[0m
+  [1m[35m (132.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113144543')
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (4.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-11-13 17:06:06.965242"], ["email", "remember_user@example.com"], ["name", "Remember User"], ["password_digest", "$2a$10$nwjvB/7inX8DeIOQ78.c3O9YKHBPjbuqLj9gyyb7MJb5iFR5SLuje"], ["updated_at", "2014-11-13 17:06:06.965242"]]
+  [1m[35mSQL (0.7ms)[0m  UPDATE "users" SET "remember_digest" = '3ce6ba10d655012db2b337989d721fbc2c793a1f' WHERE "users"."id" = ?  [["id", 1]]
+  [1m[36m (125.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users"
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "users"[0m
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('rdfgemember_user@example.com') LIMIT 1
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["created_at", "2014-11-13 17:07:03.873036"], ["email", "rdfgemember_user@example.com"], ["name", "Remedfgdmber User"], ["password_digest", "$2a$10$1mOriOL55jTE4vUEf0xJTOJdILEzH.nAiYPixgfw4e3krg.RAXGa2"], ["updated_at", "2014-11-13 17:07:03.873036"]]
+  [1m[35mSQL (0.8ms)[0m  UPDATE "users" SET "remember_digest" = '29c5a434144293d9dbdacf3de2e617c297fb7a14' WHERE "users"."id" = ?  [["id", 2]]
+  [1m[36m (120.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "users"
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mUser Load (4.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('gemember_user@exe.com') LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[36m (142.2ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "password_digest" varchar, "remember_digest" varchar) [0m
+  [1m[35m (131.1ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (131.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.4ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (98.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113162102')
+  [1m[36m (99.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141113123926')[0m
+  [1m[35m (99.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113144543')
+  [1m[36m (131.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "password_digest" varchar, "remember_digest" varchar) [0m
+  [1m[35m (109.8ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (142.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.4ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (155.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113162102')
+  [1m[36m (143.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141113123926')[0m
+  [1m[35m (133.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113144543')
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (4.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('gemember_user@exe.com') LIMIT 1[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "remember_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", "2014-11-13 19:08:03.555290"], ["email", "gemember_user@exe.com"], ["name", "Remedfer"], ["password_digest", "$2a$10$0y1vu0kne.QIYupQlMd/fe2BLuzZCDR5Vekaab.UZ.K5wk3Mmt/nq"], ["remember_digest", "5baec94eb9e0d995886645a5ec00ff645601b72d"], ["updated_at", "2014-11-13 19:08:03.555290"]]
+  [1m[36m (110.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users"
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "users"[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "users"[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('gemember@exe.com') LIMIT 1[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "users" ("created_at", "email", "name", "password_digest", "updated_at") VALUES (?, ?, ?, ?, ?)  [["created_at", "2014-11-13 19:10:40.358390"], ["email", "gemember@exe.com"], ["name", "edfer"], ["password_digest", "$2a$10$xEhgFQRwxrRPUzy9U6ZtteTwxR2O2B0UMAf2iUoZPTW0PVhhhgoF6"], ["updated_at", "2014-11-13 19:10:40.358390"]]
+  [1m[36m (126.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users"
+  [1m[36m (120.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "password_digest" varchar, "remember_digest" varchar) [0m
+  [1m[35m (137.4ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (131.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (133.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113162102')
+  [1m[36m (100.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141113123926')[0m
+  [1m[35m (100.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113144543')
+  [1m[36m (97.9ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "password_digest" varchar, "remember_digest" varchar) [0m
+  [1m[35m (120.8ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (131.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (132.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113162102')
+  [1m[36m (132.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141113123926')[0m
+  [1m[35m (133.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141113144543')
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('remember_user@example.com') LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "remember_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", "2014-11-13 19:12:39.506498"], ["email", "remember_user@example.com"], ["name", "Remember User"], ["password_digest", "$2a$10$JlLAp2GrMolIQ7mwpAb/eew2aek1qb5nSmhz3Yjau4fHav41p91tC"], ["remember_digest", "e023b32c3b39e7e181a12c4412288c431412c622"], ["updated_at", "2014-11-13 19:12:39.506498"]]
+  [1m[35m (134.7ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('lembrar_user@example.com') LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "remember_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", "2014-11-13 19:13:14.795944"], ["email", "lembrar_user@example.com"], ["name", "Lembrar User"], ["password_digest", "$2a$10$k.vX6E3BFsMbIsMZQRV/Bu3rBPlZwvPuwRz3rLWtT1bKyEuCOq5TO"], ["remember_digest", "71857064a45d577c811c79b5dce737f0f68cd53b"], ["updated_at", "2014-11-13 19:13:14.795944"]]
+  [1m[35m (112.8ms)[0m  commit transaction
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "users"[0m
+  [1m[35mUser Load (0.8ms)[0m  SELECT "users".* FROM "users"
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 19:21:41 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 338ms (Views: 308.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 19:21:44 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (45.4ms)
+Completed 200 OK in 290ms (Views: 288.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 19:22:14 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"HvpD7Bedv/t79xu3t0YWPe+gZeyVeJ54CUvouDYrPCmI5a+QMbtv49iGeVCgmeM09e9f340TXKHvCQ1B5PmQ/Q==", "session"=>{"email"=>"remember_user@example.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "remember_user@example.com"]]
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 363ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-13 19:22:14 +0000
+
+AbstractController::ActionNotFound (The action 'show' could not be found for UsersController):
+  actionpack (4.2.0.beta2) lib/abstract_controller/base.rb:132:in `process'
+  actionview (4.2.0.beta2) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.0.beta2) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.2.0.beta2) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.0.beta2) lib/action_controller/metal.rb:236:in `block in action'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:72:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:72:in `dispatch'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:41:in `serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0.beta2) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0.beta2) lib/action_dispatch/routing/route_set.rb:750:in `call'
+  rack (1.6.0.beta) lib/rack/etag.rb:23:in `call'
+  rack (1.6.0.beta) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0.beta) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/flash.rb:257:in `call'
+  rack (1.6.0.beta) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0.beta) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/cookies.rb:558:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/connection_adapters/abstract/connection_pool.rb:645:in `call'
+  activerecord (4.2.0.beta2) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0.beta2) lib/active_support/callbacks.rb:83:in `run_callbacks'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0.beta4) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0.beta4) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.0.beta2) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.0.beta2) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0.beta) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0.beta) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.2.0.beta2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0.beta) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0.beta2) lib/action_dispatch/middleware/static.rb:103:in `call'
+  rack (1.6.0.beta) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0.beta2) lib/rails/engine.rb:514:in `call'
+  railties (4.2.0.beta2) lib/rails/application.rb:161:in `call'
+  rack (1.6.0.beta) lib/rack/tempfile_reaper.rb:15:in `call'
+  rack (1.6.0.beta) lib/rack/lint.rb:49:in `_call'
+  rack (1.6.0.beta) lib/rack/lint.rb:37:in `call'
+  rack (1.6.0.beta) lib/rack/showexceptions.rb:24:in `call'
+  rack (1.6.0.beta) lib/rack/commonlogger.rb:33:in `call'
+  rack (1.6.0.beta) lib/rack/chunked.rb:54:in `call'
+  rack (1.6.0.beta) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0.beta) lib/rack/handler/webrick.rb:89:in `service'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /home/sergio/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/unknown_action.html.erb within rescues/layout (1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 19:24:17 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 231ms (Views: 229.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 19:24:20 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 220ms (Views: 218.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 19:24:54 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mt+Nk0UGr5Z3u3XYMnOdZ/6lhfMlNmb9pdnX4/M/MRcMwGHvYyB/jtTKFz8lrGhu5Oq/wD1dpCRDmzIaIe2dww==", "session"=>{"email"=>"lembrar_user@example.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1[0m  [["email", "lembrar_user@example.com"]]
+Redirected to http://localhost:3000/users/2
+Completed 302 Found in 345ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2014-11-13 19:24:54 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  Rendered users/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 308ms (Views: 305.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/1/" for 127.0.0.1 at 2014-11-13 19:25:07 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendered users/show.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 277ms (Views: 274.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 19:25:17 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 218ms (Views: 216.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 19:25:19 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 254ms (Views: 252.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 19:25:29 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"M1naTpvz4N7t2dNtOuyzzAnhaBBc/dRHsydYqi2xu9GlRjYyvdUwxk6osYotM0bFE65SI0SWFp5VZb1T/2MXBQ==", "session"=>{"email"=>"remember_user@example.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "remember_user@example.com"]]
+  Rendered sessions/new.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 541ms (Views: 241.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-13 19:29:20 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendered users/show.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 226ms (Views: 225.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('sergio@sapo.pt') LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "password_digest", "remember_digest", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", "2014-11-13 19:30:22.716986"], ["email", "sergio@sapo.pt"], ["name", "sergio"], ["password_digest", "$2a$10$3N4DcoP.hL9nGVvZ3jM3YOT5uE24uGsGx4fqkwTiyZZsNR7ccnhUm"], ["remember_digest", "666e1d20a97cc3623488b3b835971b16c08c8125"], ["updated_at", "2014-11-13 19:30:22.716986"]]
+  [1m[35m (127.5ms)[0m  commit transaction
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 19:30:38 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 335ms (Views: 306.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 19:30:41 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (40.5ms)
+Completed 200 OK in 326ms (Views: 324.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 19:30:54 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"MNcK8Bz0M+LuLvkMt8CG95iKpLiCzU9PqFFsjE5CXFR+vic/bvhtOFLBfP4baQkbibueSUT6J1+gQ29q7GeIiQ==", "session"=>{"email"=>"sergio@sapo.pt", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "sergio@sapo.pt"]]
+  Rendered sessions/new.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 617ms (Views: 255.0ms | ActiveRecord: 2.2ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 19:31:07 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lRQ/+F/ayeVLATCrPHAId1ZEX4AeTKI+nVfCbHvb0K7bfRI3LdaXP/futVmQ2YebR3Vlcdh7yi6VRcGK2f4Ecw==", "session"=>{"email"=>"sergio@sapo.pt", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1[0m  [["email", "sergio@sapo.pt"]]
+Redirected to http://localhost:3000/users/3
+Completed 302 Found in 302ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/users/3" for 127.0.0.1 at 2014-11-13 19:31:07 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendered users/show.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 229ms (Views: 226.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:20:49 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (3.3ms)
+Completed 500 Internal Server Error in 363ms
+
+NoMethodError (undefined method `logged_in?' for #<#<Class:0x00000004e0b768>:0x00000004e14ea8>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__1882993074157021044_41280180'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (25.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (10.5ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (3.1ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (112.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:23:16 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.1ms)
+Completed 500 Internal Server Error in 219ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x00000004e17a90>:0x00000004e5b7e0>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__1882993074157021044_41128440'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (23.0ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (8.2ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.5ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (103.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:28:40 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 319ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x00000004e17a90>:0x007f7ca98ea9b8>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__1882993074157021044_41128440'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (22.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (8.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (100.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:31:09 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 256ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x00000004e17a90>:0x00000005536ad8>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__1882993074157021044_44639500'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (23.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (10.4ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (4.5ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (112.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:33:04 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 262ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x00000004e17a90>:0x007f7ca86881d0>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__1882993074157021044_70086688991520'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (27.6ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (11.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (3.0ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (113.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:33:50 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (3.1ms)
+Completed 500 Internal Server Error in 391ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x000000053468e0>:0x00000005363be8>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__461909732869997204_44055220'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (22.4ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (10.6ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (111.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:34:52 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 223ms
+
+NameError (undefined local variable or method `x' for #<#<Class:0x00000005346ef8>:0x00000005361e60>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__461909732869997204_43856520'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (21.3ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (8.1ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.5ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (96.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:36:39 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 328ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x007f03cdc10de0>:0x007f03cdc355c8>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__461909732869997204_69827156987300'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (23.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (11.4ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.6ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (109.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:37:32 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 297ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x000000051cccd0>:0x000000051b62c8>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__461909732869997204_69827156987300'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (22.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (9.0ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (102.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:39:39 +0000
+Processing by ApplicationController#home as HTML
+  Rendered application/home.html.erb within layouts/application (0.1ms)
+Completed 500 Internal Server Error in 278ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x00000005e9c190>:0x00000005e8af30>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__461909732869997204_69827156987300'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (23.1ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (10.5ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (106.6ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-13 21:40:18 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendered users/show.html.erb within layouts/application (1.7ms)
+Completed 500 Internal Server Error in 271ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x007f03cc7c98a0>:0x007f03cc7bccb8>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__461909732869997204_69827156987300'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (24.1ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (10.4ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (3.1ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.6ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (125.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:43:10 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (1.5ms)
+Completed 500 Internal Server Error in 261ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x007f03cd994260>:0x007f03cd988230>):
+  app/views/layouts/application.html.erb:10:in `_app_views_layouts_application_html_erb__461909732869997204_69827156987300'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (23.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (13.0ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.8ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (115.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:47:18 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 275ms
+
+NoMethodError (undefined method `signed_in?' for #<#<Class:0x007f03cd994260>:0x000000029a5838>):
+  app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb__461909732869997204_21306060'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (25.2ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (11.0ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (3.0ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (114.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:48:24 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+Completed 500 Internal Server Error in 272ms
+
+NameError (undefined local variable or method `current_user' for #<#<Class:0x00000005967dc8>:0x0000000594b880>):
+  app/helpers/sessions_helper.rb:4:in `signed_in?'
+  app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb__461909732869997204_21306060'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (24.4ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (12.3ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (3.2ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.6ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (117.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:49:21 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 297ms (Views: 293.2ms | ActiveRecord: 2.1ms)
+
+
+Started DELETE "/signout" for 127.0.0.1 at 2014-11-13 21:50:07 +0000
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"2OOBVPLGmA0mS9WiucbE51VRnyqG1eNwDo8JpZhD7PuWiqybgMrG15qkUFAVb0sLRGCl20Dii2AGnQpDOmY4Jg=="}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Completed 500 Internal Server Error in 5ms
+
+NoMethodError (private method `forget' called for #<User:0x007f03cdc694e0>):
+  app/helpers/sessions_helper.rb:36:in `forget'
+  app/helpers/sessions_helper.rb:24:in `log_out'
+  app/controllers/sessions_controller.rb:19:in `destroy'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (21.0ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (9.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (4.3ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (85.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:52:50 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 273ms (Views: 269.2ms | ActiveRecord: 2.1ms)
+
+
+Started DELETE "/signout" for 127.0.0.1 at 2014-11-13 21:52:54 +0000
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"QevyBQg9HNbibAA5oxZhFQhQxIhmq09ISu7qkN6NYNoPgt/KejFCDF6DhcsPv+75GWH+eaCcJ1hC/Ol2fKi0Bw=="}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.8ms)[0m  [1mUPDATE "users" SET "remember_digest" = ?, "updated_at" = ? WHERE "users"."id" = 3[0m  [["remember_digest", nil], ["updated_at", "2014-11-13 21:52:54.259636"]]
+  [1m[35m (119.6ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 142ms (ActiveRecord: 121.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:52:54 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 264ms (Views: 262.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 21:53:00 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (34.7ms)
+Completed 200 OK in 261ms (Views: 260.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 21:53:05 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/J6BnjXJVjABAg9UYL3I8rdCH7hiN72kDi9VxJEEQkuy96xRR8UI6r3tiqbMFEcepnMlSaQA1bQGPVYiMyGWlg==", "session"=>{"email"=>"dfgd", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1[0m  [["email", "dfgd"]]
+  Rendered sessions/new.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 265ms (Views: 253.5ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 21:53:29 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uKOeNGXx+QFtu3NpXgHGqWjoMkFM7T8RymSGWuxkjrL2yrP7F/2n29FU9pvyqElFedkIsIraVwHCdoW8TkFabw==", "session"=>{"email"=>"sergio@sapo.pt", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "sergio@sapo.pt"]]
+Redirected to http://localhost:3000/users/3
+Completed 302 Found in 294ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/users/3" for 127.0.0.1 at 2014-11-13 21:53:29 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendered users/show.html.erb within layouts/application (0.2ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 241ms (Views: 239.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:53:39 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 251ms (Views: 249.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2014-11-13 21:53:56 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  Rendered users/show.html.erb within layouts/application (0.2ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 389ms (Views: 386.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:54:05 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 272ms (Views: 269.7ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/signout" for 127.0.0.1 at 2014-11-13 21:54:11 +0000
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"x5hqZHYMDHQeJUIgIFlFOJmsAkgCQ5Dhmegcc6OSuyKJ8UerBABSrqLKx9KM8MrUiJ04ucR0+PGR+h+VAbdv/w=="}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 9ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:54:11 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 235ms (Views: 233.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 21:54:14 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 240ms (Views: 238.4ms | ActiveRecord: 0.0ms)
+  [1m[36mUser Load (4.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:56:26 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 339ms (Views: 310.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 21:56:29 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (35.5ms)
+Completed 200 OK in 250ms (Views: 248.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 21:56:43 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dofNkDQpB1BdhinikftYpzuvvGkwGKszgcp847n/hcs47uBfRiVZiuFprBA9UtdLKp6GmPYvwyOJ2H8FG9pRFg==", "session"=>{"email"=>"lembrar_user@example.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.8ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "lembrar_user@example.com"]]
+  Rendered sessions/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 593ms (Views: 244.7ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 21:56:55 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Sg7Mgp8RfZgREgOJbVXKst3e5WOg4bWupKHtCjq9C4sEZ+FN7R0jQq39hnvB/EVezO/fkmbW3b6ss+7smJjfVg==", "session"=>{"email"=>"lembrar_user@example.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1[0m  [["email", "lembrar_user@example.com"]]
+  Rendered sessions/new.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 497ms (Views: 208.3ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 21:57:11 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"egkHBzeuWle7x8IQrIGUxCiVMuheSDButyG/kKudGv80YCrIRaIEjQcoR+IAKBsoOaQIGZh/WH6/M7x2CbjOIg==", "session"=>{"email"=>"lembrar_user@example.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "lembrar_user@example.com"]]
+Redirected to http://localhost:3000/users/2
+Completed 302 Found in 295ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2014-11-13 21:57:11 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  Rendered users/show.html.erb within layouts/application (1.0ms)
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 303ms (Views: 300.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:57:32 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+Completed 200 OK in 225ms (Views: 222.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2014-11-13 21:57:41 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendered users/show.html.erb within layouts/application (0.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 227ms (Views: 225.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2014-11-13 21:57:49 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  Rendered users/show.html.erb within layouts/application (0.2ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+Completed 200 OK in 244ms (Views: 242.4ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/signout" for 127.0.0.1 at 2014-11-13 21:57:53 +0000
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"CPTNUnOx93aVmUXV4DmdIQqMchWiX9J87hNampqsEsVGneCdAb2prCl2wCdMkBLNG71I5GRoumzmAVl8OInGGA=="}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.9ms)[0m  [1mUPDATE "users" SET "remember_digest" = ?, "updated_at" = ? WHERE "users"."id" = 2[0m  [["remember_digest", nil], ["updated_at", "2014-11-13 21:57:53.583459"]]
+  [1m[35m (123.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 146ms (ActiveRecord: 125.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:57:53 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 241ms (Views: 238.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 21:57:56 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 225ms (Views: 223.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 21:58:08 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"b4QI6Oh5piot8CBi5rhEHoFBqSAViAthyNFIw11JS6Uh7SUnmnX48JEfpZBKEcvykHCT0dO/Y3HAw0sl/2yfeA==", "session"=>{"email"=>"sergio@sapo.pt", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1[0m  [["email", "sergio@sapo.pt"]]
+Redirected to http://localhost:3000/users/3
+Completed 302 Found in 296ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/users/3" for 127.0.0.1 at 2014-11-13 21:58:08 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendered users/show.html.erb within layouts/application (0.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 228ms (Views: 226.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:58:17 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 251ms (Views: 248.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 21:58:48 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 269ms (Views: 267.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 21:59:34 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (2.5ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 224ms (Views: 222.0ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 21:59:42 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"BawVUvpGWj/uwlYLKjcEc9Vo/NL/FKWm6gYdlNE9p3+uY9MbYrb10beY2E5MWcQvKywHumEzAbjp88S0XNcGGA==", "session"=>{"email"=>"sergio@sapo.pt", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "sergio@sapo.pt"]]
+Redirected to http://localhost:3000/users/3
+Completed 302 Found in 296ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/users/3" for 127.0.0.1 at 2014-11-13 21:59:42 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendered users/show.html.erb within layouts/application (0.2ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 231ms (Views: 229.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 22:00:04 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 226ms (Views: 224.5ms | ActiveRecord: 0.3ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePosts (20141113221437)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (1.4ms)[0m  [1mCREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "body" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141113221437"]]
+  [1m[36m (132.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddUserIdToPosts (20141113223121)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "posts" ADD "user_id" integer[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20141113223121"]]
+  [1m[36m (145.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 22:38:44 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (3.1ms)
+Warning. Error encountered while saving cache eecdaac294dadfe634fc30abdbbfeddb758edeed/posts.css.scssc: can't dump anonymous class #<Class:0x00000001033be8>
+
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 946ms (Views: 913.7ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/posts-c15e1c77cb5b3534b610348cb9f3c56d.css?body=1" for 127.0.0.1 at 2014-11-13 22:38:46 +0000
+
+
+Started GET "/assets/posts-5cf9e471f6dbffd4600ae141132a5888.js?body=1" for 127.0.0.1 at 2014-11-13 22:38:46 +0000
+
+
+Started GET "/assets/application-c3205a9b9d7d749e887f339b21c3e510.js?body=1" for 127.0.0.1 at 2014-11-13 22:38:46 +0000
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2014-11-13 22:39:11 +0000
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  Rendered posts/new.html.erb within layouts/application (39.3ms)
+Completed 200 OK in 304ms (Views: 275.6ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2014-11-13 22:39:35 +0000
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Mmn8UTIszXFw9YsSxv731eLcro7k0rTByvpGSLbz5qiZpjoYqtxinymvBVegkDeJHJhV5nr1EN/JD59oOxlHzw==", "post"=>{"title"=>"primeiro post", "body"=>"corpo do primeiro post"}, "commit"=>"Create post"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 500 Internal Server Error in 7ms
+
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  app/controllers/posts_controller.rb:9:in `create'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (18.7ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (9.1ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (3.4ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.6ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (77.7ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2014-11-13 22:41:31 +0000
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Mmn8UTIszXFw9YsSxv731eLcro7k0rTByvpGSLbz5qiZpjoYqtxinymvBVegkDeJHJhV5nr1EN/JD59oOxlHzw==", "post"=>{"title"=>"primeiro post", "body"=>"corpo do primeiro post"}, "commit"=>"Create post"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Completed 500 Internal Server Error in 61ms
+
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  app/controllers/posts_controller.rb:9:in `create'
+
+
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_source.erb (19.9ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_trace.html.erb (11.2ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (4.0ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.6ms)
+  Rendered /home/sergio/.rvm/gems/ruby-2.1.1/gems/web-console-2.0.0.beta4/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (83.1ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2014-11-13 22:41:57 +0000
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Mmn8UTIszXFw9YsSxv731eLcro7k0rTByvpGSLbz5qiZpjoYqtxinymvBVegkDeJHJhV5nr1EN/JD59oOxlHzw==", "post"=>{"title"=>"primeiro post", "body"=>"corpo do primeiro post"}, "commit"=>"Create post"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "posts" ("body", "created_at", "title", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)  [["body", "corpo do primeiro post"], ["created_at", "2014-11-13 22:41:57.352353"], ["title", "primeiro post"], ["updated_at", "2014-11-13 22:41:57.352353"], ["user_id", 3]]
+  [1m[36m (95.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 157ms (ActiveRecord: 99.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 22:41:57 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.1ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 287ms (Views: 284.4ms | ActiveRecord: 0.4ms)
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "posts"[0m
+  [1m[35mPost Load (0.9ms)[0m  SELECT "posts".* FROM "posts"
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 23:08:58 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (2.9ms)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 440ms (Views: 409.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2014-11-13 23:09:05 +0000
+Processing by PostsController#index as HTML
+  [1m[36mPost Load (0.5ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  Rendered posts/index.html.erb within layouts/application (22.7ms)
+Completed 200 OK in 325ms (Views: 309.7ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2014-11-13 23:09:20 +0000
+Processing by PostsController#new as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered posts/new.html.erb within layouts/application (46.2ms)
+Completed 200 OK in 307ms (Views: 303.5ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2014-11-13 23:09:36 +0000
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"u/SFTUUZdqY455tNwtTKkKF3dKL6mzaE2Oc59Pl6tU4QO0ME3enZSGG9FQikugrMXzOPymS8kprbEuDUdJAUKQ==", "post"=>{"title"=>"segundo", "body"=>"segundo body"}, "commit"=>"Create post"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO "posts" ("body", "created_at", "title", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["body", "segundo body"], ["created_at", "2014-11-13 23:09:36.945416"], ["title", "segundo"], ["updated_at", "2014-11-13 23:09:36.945416"], ["user_id", 3]]
+  [1m[35m (204.4ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 224ms (ActiveRecord: 206.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 23:09:37 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+Completed 200 OK in 336ms (Views: 334.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2014-11-13 23:09:42 +0000
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.5ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  Rendered posts/index.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 263ms (Views: 260.5ms | ActiveRecord: 0.8ms)
+
+
+Started DELETE "/signout" for 127.0.0.1 at 2014-11-13 23:09:46 +0000
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"Evt5dBqa+SZxPFnILNHuqjIbXDLGuN7xm7P7FX2/5YO5NL89gmpWyChm141Kvy72zF+nWlifeu+YRiI18FVE5A=="}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 23:09:46 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 273ms (Views: 271.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2014-11-13 23:09:50 +0000
+Processing by PostsController#index as HTML
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  Rendered posts/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 305ms (Views: 302.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 23:10:25 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 274ms (Views: 272.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 23:10:43 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"A3Irr836ujJ5/0/Kizfjam7aENjOUhyuCnMT20T2SE2ove3mVQoV3CClwY/tWSM2kJ7rsFB1uLAJhsr7yRzpKg==", "session"=>{"email"=>"lembrar_user@example.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "lembrar_user@example.com"]]
+Redirected to http://localhost:3000/users/2
+Completed 302 Found in 300ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/users/2" for 127.0.0.1 at 2014-11-13 23:10:43 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  Rendered users/show.html.erb within layouts/application (1.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 263ms (Views: 260.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2014-11-13 23:10:47 +0000
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.7ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  Rendered posts/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 263ms (Views: 260.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2014-11-13 23:10:56 +0000
+Processing by PostsController#new as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered posts/new.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 251ms (Views: 248.1ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2014-11-13 23:11:19 +0000
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dMR1ZbkPiQb8dsNQSwUS2ODlA3kbsVVt+MyT291IX4HfC7MsIf8m6KUsTRUta9KEHqH4EYWW8XP7OUr7UKL+5g==", "post"=>{"title"=>"lembrar do post", "body"=>"body of lemb pos"}, "commit"=>"Create post"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "posts" ("body", "created_at", "title", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["body", "body of lemb pos"], ["created_at", "2014-11-13 23:11:19.720702"], ["title", "lembrar do post"], ["updated_at", "2014-11-13 23:11:19.720702"], ["user_id", 2]]
+  [1m[35m (186.4ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 219ms (ActiveRecord: 187.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 23:11:19 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.2ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+Completed 200 OK in 257ms (Views: 255.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2014-11-13 23:11:25 +0000
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.5ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered posts/index.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 266ms (Views: 263.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2014-11-13 23:11:34 +0000
+Processing by PostsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered posts/new.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 284ms (Views: 281.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2014-11-13 23:11:35 +0000
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.5ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered posts/index.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 272ms (Views: 269.4ms | ActiveRecord: 1.0ms)
+
+
+Started DELETE "/signout" for 127.0.0.1 at 2014-11-13 23:11:47 +0000
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"l0fQBscLK921SWD/lWupNB6g/5Y0iSSbtXYyng10+WI8iBZPX/uEM+wT7rrzBWlo4OQE/qqugIW2g+u+gJ5YBQ=="}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 11ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 23:11:47 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 284ms (Views: 282.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2014-11-13 23:11:50 +0000
+Processing by PostsController#index as HTML
+  [1m[35mPost Load (0.5ms)[0m  SELECT "posts".* FROM "posts"
+  Rendered posts/index.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 305ms (Views: 303.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/signin" for 127.0.0.1 at 2014-11-13 23:11:57 +0000
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 328ms (Views: 326.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/signin" for 127.0.0.1 at 2014-11-13 23:12:05 +0000
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"pHmUnqsFL/SDaTDE86Gdz7sgYeT51mMUpBLckT/EJIMPtlLXM/WAGtozvoGVz12TRWSajGfxxwqn5wWxsi6F5A==", "session"=>{"email"=>"sergio@sapo.pt", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1[0m  [["email", "sergio@sapo.pt"]]
+Redirected to http://localhost:3000/users/3
+Completed 302 Found in 295ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/users/3" for 127.0.0.1 at 2014-11-13 23:12:05 +0000
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendered users/show.html.erb within layouts/application (0.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+Completed 200 OK in 291ms (Views: 289.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2014-11-13 23:12:09 +0000
+Processing by PostsController#index as HTML
+  [1m[36mPost Load (0.7ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered posts/index.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 299ms (Views: 296.4ms | ActiveRecord: 1.2ms)
+
+
+Started DELETE "/signout" for 127.0.0.1 at 2014-11-13 23:12:13 +0000
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"JTG+StmJHYRjAR6VIplvmxRLj8EuUKSpWAM/SCyBvsuO/ngDQXmyajpbkNBE96/H6g90qbB3ALdb9uZooWsfrA=="}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 9ms (ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2014-11-13 23:12:13 +0000
+Processing by UsersController#home as HTML
+  Rendered users/home.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 291ms (Views: 289.4ms | ActiveRecord: 0.0ms)

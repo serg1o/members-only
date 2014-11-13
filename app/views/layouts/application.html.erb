@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MembersOnly</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+<header>
+<% if signed_in? %>
+  <%= link_to "Sign out", signout_path, method: "delete" %>
+  <%= link_to "Create post", new_post_path %>
+  <p><%= current_user.name %></p>
+<% else %>
+  <%= link_to "Sign in", signin_path %>
+<% end %>
+<%= link_to "All posts", posts_path %>
+</header>
+<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<h1> All Posts </h1>
+
+<ul class="users">
+
+<% @posts.each do |post| %>
+    <li>
+      <p>Title: <%= post.title %></p>
+      <p>Body: <%= post.body %></p>
+      <% if signed_in? %>
+      <p>Author: <%= User.find_by(id: post.user_id).name %></p>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
